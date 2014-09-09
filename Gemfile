@@ -11,8 +11,6 @@ gem 'turbolinks',           '1.1.1'
 gem 'jbuilder',             '1.0.2'
 gem 'thin',                 '1.6.2'
 gem 'hirb',                 '0.7.2'
-gem 'sextant',              '0.2.4'
-
 
 group :test, :development do
   gem 'sqlite3',            '1.3.8'
