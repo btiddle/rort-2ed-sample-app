@@ -1,7 +1,12 @@
 class User < ActiveRecord::Base
-  before_save { self.email = email.downcase }
+  before_save { email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  # This one has the problem that multiple periods (tom@tom.....com)
+  # revaluated to valid when it should be negative.
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
