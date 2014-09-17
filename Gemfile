@@ -21,6 +21,7 @@ group :test, :development do
   gem 'rspec-rails',        '2.13.1'
   gem 'better_errors',      '2.0.0'
   gem 'binding_of_caller',  '0.7.2'
+  gem 'factory_girl_rails', '4.2.0'
 end
 
 group :test, :development do
