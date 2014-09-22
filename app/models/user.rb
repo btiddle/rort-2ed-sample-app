@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
+
   before_save { email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
   before_create :create_remember_token
-
 
   # This one has the problem that multiple periods (tom@tom.....com)
   # revaluated to valid when it should be negative.
@@ -21,6 +22,11 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
   end
 
   private
